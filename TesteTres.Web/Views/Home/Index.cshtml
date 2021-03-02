@@ -1,0 +1,39 @@
+﻿@model List<CandidatoRespostaModel>
+
+@{
+    ViewData["Title"] = "Meus Repositórios";
+}
+
+    <div class="text-center">
+        <h1 class="display-5">Meus Repositórios </h1>
+        <div class="alert alert-secondary" role="alert">
+            Ao clicar no nome de um repositório, você será redirecionado para tela de detalhes.
+        </div>
+    </div>
+
+
+<div class="row">
+
+    @if (Model.Count() == 0)
+    {
+        <h4 class="text-center">Nenhum registro retornado.</h4>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.ActionLink(item.Name, "DetalhesDoRepositorio", new { username = item.Owner.Login, nomeRepositorio = item.Name })
+                        </h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Language)</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

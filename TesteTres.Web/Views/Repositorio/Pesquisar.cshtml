@@ -1,0 +1,63 @@
+﻿@model PesquisarRepositorioViewModel
+
+@{
+    ViewData["Title"] = "Pesquisar Repositórios";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Pesquisar Repositórios</h1>
+    <div class="alert alert-secondary" role="alert">
+        Pesquisar por repositórios do github utilizando como filtro nome ou parte do nome do repositório.
+    </div>
+</div>
+
+
+<div class="card mb-12">
+    <div class="card-body">
+
+        <form method="post" asp-action="Pesquisar">
+            <div class="tab-content" id="nav-tabContent">
+
+                <div class="form-row">
+
+                    <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Pesquisar Repositório:</label>
+                        <input type="text" class="form-control" asp-for="NomeRepositorio" id="NomeRepositorio" placeholder="digite aqui o repositório ou parte dele" value="@Model.NomeRepositorio" />
+                    </div>
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-0">Pesquisar</button>
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+
+    @if (Model.Items.Count() == 0)
+    {
+        <h4 class="text-center">Nenhum registro retornado.</h4>
+    }
+    else
+    {
+        foreach (var item in Model.Items)
+        {
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                           
+                            @Html.ActionLink(item.Name, "DetalhesDoRepositorio","Home", new { username = item.Owner.Login, nomeRepositorio = item.Name })
+
+                        </h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Language)</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

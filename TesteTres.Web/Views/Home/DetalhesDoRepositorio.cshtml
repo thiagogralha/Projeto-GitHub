@@ -1,0 +1,95 @@
+﻿@model DetalhesRepositorioRespostaModel
+
+@{
+    ViewData["Title"] = "Meus Repositórios";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Detalhes do Repositório: <b> @Model.Name </b> </h1>
+    <div class="alert alert-secondary" role="alert">
+        Área responsável pelos detalhes do repositório.
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-6">
+            <div class="card-body">
+
+                <div class="tab-content" id="nav-tabContent">
+
+                    <form method="post" asp-action="InserirFavorito">
+                        <div class="form-row">
+
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <label><b>Nome:</b></label>
+                                <input type="hidden" asp-for="Name" />
+                                <p>@Model.Name</p>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <label><b>Descrição:</b></label>
+                                <input type="hidden" asp-for="Description" />
+                                <p>@Model.Description</p>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <label><b>Linguagem:</b></label>
+                                <input type="hidden" asp-for="Language" />
+                                <p><span class="badge badge-success">@Model.Language</span></p>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <label><b>Última Data Atualização:</b></label>
+                                <input type="hidden" asp-for="Updated_at" />
+                                <p>@Model.Updated_at</p>
+                            </div>
+
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <label><b>Dono do Repositório:</b></label>
+                                <input type="hidden" id="Owner" asp-for="Owner.Login" />
+                                <p>@Model.Owner.Login</p>
+                            </div>
+
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                <button type="submit" class="btn btn-primary mb-0"> Adicionar aos Favoritos</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="text-center">
+    <div class="alert alert-success" role="alert">
+        Contribuidores do Repositório.
+    </div>
+</div>
+
+
+@if (Model.Contribuidores.Count() == 0)
+{
+    <h4 class="text-center">Nenhum registro retornado.</h4>
+}
+else
+{
+
+    foreach (var item in Model.Contribuidores)
+    {
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success"> <img class="card-img-top" src="@item.Avatar_url" alt="Card image cap" height="160" width="160"></div>
+            <div class="card-body text-success">
+                <label><b>Login:</b> @item.Login</label>
+                <label><b>Contribuições:</b> @item.Contributions</label>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <a href="@item.Html_url" target="_blank">@item.Html_url</a>
+            </div>
+        </div>
+    }
+}

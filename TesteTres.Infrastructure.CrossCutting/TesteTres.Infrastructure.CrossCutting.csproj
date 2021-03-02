@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TesteTres.Infrastructure.Core\TesteTres.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\TesteTres.Infrastructure.CrossCutting.GitHub\TesteTres.Infrastructure.CrossCutting.GitHub.csproj" />
+    <ProjectReference Include="..\TesteTres.Infrastructure.Data\TesteTres.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\TesteTres.Service\TesteTres.Service.csproj" />
+  </ItemGroup>
+
+</Project>
